@@ -1,4 +1,4 @@
-# Langchain4j Demos
+# Agent Framework Demos
 
 ## projects
 1. langchain
