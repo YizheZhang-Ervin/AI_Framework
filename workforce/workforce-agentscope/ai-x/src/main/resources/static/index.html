@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-X 智能体聊天</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>AI-X</h1>
+                <p class="subtitle">智能体助手</p>
+            </div>
+            
+            <div class="skills-section">
+                <h2 class="section-title">
+                    <span class="icon">&#9889;</span>
+                    可用技能
+                </h2>
+                <div id="skillsList" class="skills-list">
+                    <div class="loading">加载技能中...</div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h2 class="section-title">
+                    <span class="icon">&#8505;</span>
+                    关于
+                </h2>
+                <p class="info-text">
+                    基于 AgentScope Java 框架，支持动态加载 skills 目录下的标准格式技能。
+                </p>
+            </div>
+
+            <div class="status-bar">
+                <div class="status-indicator" id="statusIndicator"></div>
+                <span id="statusText">就绪</span>
+            </div>
+        </aside>
+
+        <!-- 主聊天区 -->
+        <main class="chat-area">
+            <div class="chat-header">
+                <h2>对话</h2>
+                <button id="clearChatBtn" class="btn-icon" title="清空对话">
+                    <span>&#128465;</span>
+                </button>
+            </div>
+
+            <div id="chatMessages" class="chat-messages">
+                <!-- 欢迎消息 -->
+                <div class="message agent">
+                    <div class="avatar agent-avatar">AI</div>
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="sender">AI-X 助手</span>
+                        </div>
+                        <div class="message-text">你好！我是 AI-X 智能体助手。我可以利用加载的技能来帮助你解决问题。请问有什么可以帮助你的吗？</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 输入区 -->
+            <div class="input-area">
+                <div class="input-wrapper">
+                    <textarea id="messageInput" 
+                              class="message-input" 
+                              placeholder="输入你的消息..."
+                              rows="1"
+                              maxlength="10000"></textarea>
+                    <div class="input-actions">
+                        <!-- 文件上传按钮 -->
+                        <label for="fileUpload" class="btn-file" title="上传附件">
+                            <span>&#128206;</span>
+                        </label>
+                        <input type="file" id="fileUpload" class="file-input" multiple>
+                        <span id="charCount" class="char-count">0/10000</span>
+                        <button id="sendBtn" class="btn-send" title="发送消息 (Enter)">
+                            <span>&#10148;</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- 文件预览区域 -->
+                <div id="filePreview" class="file-preview" style="display:none;"></div>
+                <p class="input-hint">按 Enter 发送，Shift+Enter 换行 | 支持上传文件作为附件</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/chat.js"></script>
+</body>
+</html>

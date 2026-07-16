@@ -1,0 +1,53 @@
+# AI-X Agent 配置文件
+# Spring Boot 版 - 所有配置统一放在 aix.* 前缀下
+# 配置文件支持环境变量占位符 ${VAR_NAME:default_value}
+
+# 大模型配置
+aix:
+  model:
+    # 模型提供商: openai / dashscope / anthropic / gemini / ollama
+    provider: ${MODEL_PROVIDER:openai}
+    # 模型名称
+    name: ${MODEL_NAME:agnes-2.0-flash}
+    # API密钥
+    api-key: ${MODEL_API_KEY:sk-1PbaswslkM7od2fmxifncWuDzynyNgw2481cRNw8WFDe6uDr}
+    # API基础URL（可选，留空使用默认地址）
+    base-url: ${MODEL_BASE_URL:https://apihub.agnes-ai.com/v1}
+    # 组织ID（OpenAI专用，可选）
+    organization-id: ${MODEL_ORG_ID:}
+
+  # 服务器配置
+  server:
+    # HTTP服务器端口（Spring Boot默认使用server.port，这里保留用于应用层使用）
+    port: ${SERVER_PORT:8080}
+    # 工作空间路径（相对于项目根目录）
+    workspace: ${WORKSPACE_DIR:.agentscope/workspace}
+    # skills目录路径（相对于classpath）
+    skills-dir: ${SKILLS_DIR:skills}
+
+  # 智能体配置
+  agent:
+    # 智能体名称
+    name: ${AGENT_NAME:ai-x-agent}
+    # 系统提示词
+    sys-prompt: "You are a helpful AI assistant that can use various skills to help users. When responding to any question, always think step by step. Start your response with '【推理过程】' and provide your detailed reasoning, then end with '【最终回答】' followed by your final answer. This is mandatory."
+    # 最大ReAct迭代次数
+    max-iters: ${MAX_ITERS:10}
+
+# Spring Boot 服务器配置
+server:
+  port: ${SERVER_PORT:8080}
+
+# Spring Boot 配置
+spring:
+  # 文件上传大小限制
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+  web:
+    resources:
+      static-locations: classpath:/static/
+      cache:
+        period: 0
